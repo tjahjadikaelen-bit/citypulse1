@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>City Pulse — Smart Urban Mobility Jakarta</title>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="page-dashboard">
+
+
+
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0a1a14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+      </svg>
+    </div>
+    <span>City Pulse</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features" class="active">Features</a>
+    <a href="#routes">Routes</a>
+    <a href="#traffic">Traffic</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="btn btn-ghost">Sign In</a>
+    <a href="#planner" onclick="navigate('planner');return false;" class="btn btn-accent">Plan Journey ›</a>
+  </div>
+</nav>
+
+<!-- ALERT TICKER -->
+<div class="alert-ticker" style="margin-top: 65px;">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--red)"></span>Line 3 — Delays of 8 min due to signal fault at Sudirman</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--amber)"></span>Jl. Thamrin congestion index: HIGH — est. 22 min delay</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--accent)"></span>New TransJakarta corridor open: Blok M → Kemang</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--blue)"></span>Shared bikes available at 48 stations city-wide</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--red)"></span>Incident: Jl. Gatot Subroto — right lane closed</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--amber)"></span>Crowd level: Bundaran HI station — MODERATE</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--red)"></span>Line 3 — Delays of 8 min due to signal fault at Sudirman</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--amber)"></span>Jl. Thamrin congestion index: HIGH — est. 22 min delay</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--accent)"></span>New TransJakarta corridor open: Blok M → Kemang</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--blue)"></span>Shared bikes available at 48 stations city-wide</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--red)"></span>Incident: Jl. Gatot Subroto — right lane closed</span>
+    <span class="ticker-item"><span class="ticker-dot" style="background:var(--amber)"></span>Crowd level: Bundaran HI station — MODERATE</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="fade-in">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Smart Mobility Platform · Jakarta
+    </div>
+    <h1 class="hero-title">
+      Move Smarter<br>Through the <span class="accent-text">City</span>
+    </h1>
+    <p class="hero-desc">
+      City Pulse integrates every mode of urban transport — subway, bus, ride-hailing, and shared bikes — into one intelligent platform. Real-time data, personalised routes, one tap to go.
+    </p>
+    <div class="hero-ctas">
+      <a href="#planner" onclick="navigate('planner');return false;" class="btn btn-accent btn-lg">Plan My Route</a>
+      <a href="#traffic" class="btn btn-ghost btn-lg">Live Traffic Map</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">2.4M</div>
+        <div class="hero-stat-label">Daily Commuters</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">18min</div>
+        <div class="hero-stat-label">Avg. Time Saved</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">99.2%</div>
+        <div class="hero-stat-label">Data Uptime</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Dashboard -->
+  <div class="dashboard-panel fade-in-2">
+    <div class="panel-header">
+      <span class="panel-title">Live City View</span>
+      <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+    </div>
+
+    <!-- Mini Map -->
+    <div class="map-area">
+      <div class="map-grid"></div>
+
+      <!-- Roads -->
+      <div class="map-road map-road-h" style="top:45%;"></div>
+      <div class="map-road map-road-h" style="top:65%;"></div>
+      <div class="map-road map-road-h" style="top:25%;"></div>
+      <div class="map-road map-road-v" style="left:30%;"></div>
+      <div class="map-road map-road-v" style="left:55%;"></div>
+      <div class="map-road map-road-v" style="left:75%;"></div>
+
+      <!-- Congestion hotspots -->
+      <div class="hotspot" style="width:80px;height:80px;background:radial-gradient(circle,rgba(240,92,74,0.5),transparent);top:36%;left:47%;transform:translate(-50%,-50%);animation-delay:0s;"></div>
+      <div class="hotspot" style="width:60px;height:60px;background:radial-gradient(circle,rgba(240,180,74,0.45),transparent);top:60%;left:72%;transform:translate(-50%,-50%);animation-delay:1s;"></div>
+      <div class="hotspot" style="width:40px;height:40px;background:radial-gradient(circle,rgba(74,240,196,0.4),transparent);top:22%;left:28%;transform:translate(-50%,-50%);animation-delay:2s;"></div>
+
+      <!-- Labels -->
+      <div class="map-label" style="top:8px;left:8px;">Bundaran HI</div>
+      <div class="map-label" style="bottom:8px;right:8px;">Blok M</div>
+      <div class="map-label" style="top:8px;right:8px;">Sudirman</div>
+
+      <!-- Status overlay -->
+      <div style="position:absolute;bottom:8px;left:8px;display:flex;gap:6px;align-items:center;">
+        <span style="font-size:9px;color:var(--red);background:rgba(240,92,74,0.15);border:1px solid rgba(240,92,74,0.25);padding:2px 6px;border-radius:4px;font-weight:600;">■ Severe</span>
+        <span style="font-size:9px;color:var(--amber);background:rgba(240,180,74,0.15);border:1px solid rgba(240,180,74,0.25);padding:2px 6px;border-radius:4px;font-weight:600;">■ Heavy</span>
+        <span style="font-size:9px;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(74,240,196,0.2);padding:2px 6px;border-radius:4px;font-weight:600;">■ Smooth</span>
+      </div>
+    </div>
+
+    <!-- Route suggestions -->
+    <div class="route-cards">
+      <div class="route-card active">
+        <div class="route-icon" style="background:rgba(74,240,196,0.12);">🚇</div>
+        <div class="route-info">
+          <div class="route-name">MRT + Walk</div>
+          <div class="route-meta">Sudirman → Blok M · 3 stops</div>
+        </div>
+        <div class="route-time">14 min</div>
+      </div>
+      <div class="route-card">
+        <div class="route-icon" style="background:rgba(74,144,240,0.12);">🚌</div>
+        <div class="route-info">
+          <div class="route-name">TransJakarta Express</div>
+          <div class="route-meta">Corridor 1 · 6 stops</div>
+        </div>
+        <div class="route-time">22 min</div>
+      </div>
+      <div class="route-card">
+        <div class="route-icon" style="background:rgba(164,106,240,0.12);">🛵</div>
+        <div class="route-info">
+          <div class="route-name">Ride-Hailing</div>
+          <div class="route-meta">Ojek · Door to door</div>
+        </div>
+        <div class="route-time">31 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-label">Platform Features</div>
+  <h2 class="section-title">Everything you need<br>to commute smarter</h2>
+  <p class="section-desc">From planning to payment — City Pulse handles every step of your urban journey, powered by live data and intelligent routing.</p>
+
+  <div class="features-grid">
+    <!-- Feature 1 -->
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:rgba(74,240,196,0.12);">🗺️</div>
+      <div class="feature-title">Multi-modal Route Integration</div>
+      <p class="feature-desc">Combine subway, bus, ride-hailing, and shared vehicles to generate the fastest, cheapest, or most comfortable travel plans — tailored to your exact preferences.</p>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:rgba(74,144,240,0.12);">📡</div>
+      <div class="feature-title">Real-time Traffic Monitoring</div>
+      <p class="feature-desc">Live updates on vehicle locations, road congestion, station crowd density, and service suspensions — refreshed every 30 seconds from city-wide sensor networks.</p>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:rgba(164,106,240,0.12);">🧠</div>
+      <div class="feature-title">Personalised Recommendations</div>
+      <p class="feature-desc">Smart suggestions based on your habits: regular work routes, preferred departure times, and historical travel records. City Pulse learns to serve you better every day.</p>
+    </div>
+
+    <!-- Feature 4 -->
+    <div class="feature-card">
+      <div class="feature-icon-wrap" style="background:rgba(240,180,74,0.12);">💳</div>
+      <div class="feature-title">One-Stop Service Hub</div>
+      <p class="feature-desc">In-app payment, electronic tickets, detailed travel reports, and commute reminders — everything managed from one platform so you never fumble for cards again.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY PLANNER -->
+<section class="section" id="routes">
+  <div class="feature-demo-grid">
+    <div>
+      <div class="section-label">Journey Planner</div>
+      <h2 class="section-title">Plan your perfect route</h2>
+      <p class="section-desc">Enter your origin and destination. Choose your priority. City Pulse calculates and compares all available multi-modal options instantly.</p>
+
+      <div class="modes-row">
+        <div class="mode-pill active">🚇 MRT / Subway</div>
+        <div class="mode-pill">🚌 TransJakarta</div>
+        <div class="mode-pill">🛵 Ojek / Grab</div>
+        <div class="mode-pill">🚲 Shared Bike</div>
+        <div class="mode-pill">🚶 Walking</div>
+      </div>
+    </div>
+
+    <div class="planner-panel">
+      <div class="planner-title">Where are you going?</div>
+
+      <div class="planner-input">
+        <span class="input-dot" style="background:var(--accent);"></span>
+        <input type="text" placeholder="From: Current location" value="Sudirman Station">
+      </div>
+      <div style="margin-left:16px;width:1px;height:12px;background:var(--border);margin-bottom:0;"></div>
+      <div class="planner-input">
+        <span class="input-dot" style="background:var(--red);border-radius:2px;"></span>
+        <input type="text" placeholder="To: Destination">
+      </div>
+
+      <div class="prefs-row">
+        <span class="pref-chip active">⚡ Fastest</span>
+        <span class="pref-chip">💰 Cheapest</span>
+        <span class="pref-chip">😌 Comfortable</span>
+        <span class="pref-chip">🌿 Low emissions</span>
+      </div>
+
+      <button class="btn btn-accent" style="width:100%;justify-content:center;padding:13px;" onclick="openPlanner()">
+        Search Routes →
+      </button>
+
+      <div class="plan-results">
+        <div class="plan-option best">
+          <div>
+            <div class="best-badge">BEST MATCH</div>
+            <div class="plan-steps">
+              <div class="plan-step-icon" style="background:rgba(74,240,196,0.12);color:var(--accent);">🚇</div>
+              <span class="plan-connector">›</span>
+              <div class="plan-step-icon" style="background:rgba(74,144,240,0.12);">🚶</div>
+            </div>
+          </div>
+          <div style="flex:1;padding-left:8px;">
+            <div style="font-size:12px;color:var(--text-secondary);">MRT Line 1 · 3 stops + 4 min walk</div>
+          </div>
+          <div>
+            <div class="plan-time" style="color:var(--accent);">14 min</div>
+            <div class="plan-price">Rp 7,000</div>
+          </div>
+        </div>
+
+        <div class="plan-option">
+          <div class="plan-steps">
+            <div class="plan-step-icon" style="background:rgba(74,144,240,0.12);">🚌</div>
+            <span class="plan-connector">›</span>
+            <div class="plan-step-icon" style="background:rgba(164,106,240,0.12);">🚶</div>
+          </div>
+          <div style="flex:1;padding-left:12px;">
+            <div style="font-size:12px;color:var(--text-secondary);">TransJakarta Corridor 1 · 6 stops</div>
+          </div>
+          <div>
+            <div class="plan-time">22 min</div>
+            <div class="plan-price">Rp 3,500</div>
+          </div>
+        </div>
+
+        <div class="plan-option">
+          <div class="plan-steps">
+            <div class="plan-step-icon" style="background:rgba(240,180,74,0.12);">🛵</div>
+          </div>
+          <div style="flex:1;padding-left:12px;">
+            <div style="font-size:12px;color:var(--text-secondary);">Ride-hailing · Door to door</div>
+          </div>
+          <div>
+            <div class="plan-time">31 min</div>
+            <div class="plan-price">Rp 22,000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAFFIC HEATMAP -->
+<section class="section" id="traffic">
+  <div class="section-label">Congestion Analysis</div>
+  <h2 class="section-title">Real-time traffic intelligence</h2>
+  <p class="section-desc">Live spatial visualization of Jakarta's road network, updated continuously from traffic sensors and crowd-sourced data.</p>
+
+  <div class="heatmap-section">
+    <div class="heatmap-grid-container">
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <span style="font-family:'Syne',sans-serif;font-size:14px;font-weight:600;">Jakarta Rush Hour — Live Heatmap</span>
+          <span class="live-badge"><span class="live-dot"></span>UPDATING</span>
+        </div>
+        <div class="heatmap-canvas">
+          <div class="map-grid"></div>
+          <!-- Dense road network -->
+          <div class="map-road map-road-h" style="top:30%;background:rgba(255,255,255,0.06);height:10px;"></div>
+          <div class="map-road map-road-h" style="top:50%;background:rgba(255,255,255,0.06);height:10px;"></div>
+          <div class="map-road map-road-h" style="top:70%;background:rgba(255,255,255,0.06);height:8px;"></div>
+          <div class="map-road map-road-v" style="left:25%;background:rgba(255,255,255,0.06);width:10px;"></div>
+          <div class="map-road map-road-v" style="left:50%;background:rgba(255,255,255,0.06);width:10px;"></div>
+          <div class="map-road map-road-v" style="left:72%;background:rgba(255,255,255,0.06);width:8px;"></div>
+
+          <!-- Severe hotspots (red) -->
+          <div class="hotspot" style="width:100px;height:100px;background:radial-gradient(circle,rgba(240,92,74,0.7) 10%,rgba(240,92,74,0.2) 50%,transparent 70%);top:45%;left:47%;transform:translate(-50%,-50%);animation-delay:0s;"></div>
+          <div class="hotspot" style="width:70px;height:70px;background:radial-gradient(circle,rgba(240,92,74,0.6),transparent 70%);top:26%;left:23%;transform:translate(-50%,-50%);animation-delay:1.5s;"></div>
+
+          <!-- Heavy hotspots (amber) -->
+          <div class="hotspot" style="width:80px;height:80px;background:radial-gradient(circle,rgba(240,180,74,0.55),transparent 70%);top:65%;left:70%;transform:translate(-50%,-50%);animation-delay:0.8s;"></div>
+          <div class="hotspot" style="width:55px;height:55px;background:radial-gradient(circle,rgba(240,180,74,0.5),transparent 70%);top:48%;left:26%;transform:translate(-50%,-50%);animation-delay:2s;"></div>
+
+          <!-- Smooth spots (green) -->
+          <div class="hotspot" style="width:50px;height:50px;background:radial-gradient(circle,rgba(74,240,196,0.4),transparent 70%);top:18%;left:70%;transform:translate(-50%,-50%);animation-delay:1s;"></div>
+
+          <!-- Area labels -->
+          <div class="map-label" style="top:7px;left:8px;font-size:9px;">SCBD</div>
+          <div class="map-label" style="bottom:7px;left:8px;font-size:9px;">Blok M</div>
+          <div class="map-label" style="top:7px;right:8px;font-size:9px;">Menteng</div>
+          <div class="map-label" style="bottom:7px;right:8px;font-size:9px;">Kuningan</div>
+          <div class="map-label" style="top:43%;left:50%;transform:translate(-50%,-50%);font-size:9px;color:var(--red);">Sudirman</div>
+
+          <!-- Legend -->
+          <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;">
+            <span style="font-size:9px;color:var(--red);font-weight:600;">■ Severe</span>
+            <span style="font-size:9px;color:var(--amber);font-weight:600;">■ Heavy</span>
+            <span style="font-size:9px;color:var(--accent);font-weight:600;">■ Smooth</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:12px;letter-spacing:0.04em;text-transform:uppercase;">Top 5 Congested Segments</div>
+        <div class="congestion-list">
+          <div class="congestion-item">
+            <span class="cong-rank">#1</span>
+            <div class="cong-bar-wrap">
+              <div class="cong-label">Jl. Sudirman (Semanggi)</div>
+              <div class="cong-bar" style="width:92%"></div>
+            </div>
+            <span class="cong-index">9.2</span>
+          </div>
+          <div class="congestion-item">
+            <span class="cong-rank">#2</span>
+            <div class="cong-bar-wrap">
+              <div class="cong-label">Jl. Thamrin (HI)</div>
+              <div class="cong-bar" style="width:78%"></div>
+            </div>
+            <span class="cong-index" style="color:var(--amber);">7.8</span>
+          </div>
+          <div class="congestion-item">
+            <span class="cong-rank">#3</span>
+            <div class="cong-bar-wrap">
+              <div class="cong-label">Jl. Gatot Subroto</div>
+              <div class="cong-bar" style="width:71%"></div>
+            </div>
+            <span class="cong-index" style="color:var(--amber);">7.1</span>
+          </div>
+          <div class="congestion-item">
+            <span class="cong-rank">#4</span>
+            <div class="cong-bar-wrap">
+              <div class="cong-label">Jl. HR Rasuna Said</div>
+              <div class="cong-bar" style="width:63%;background:linear-gradient(90deg,var(--amber),#e0c060);"></div>
+            </div>
+            <span class="cong-index" style="color:var(--amber);">6.3</span>
+          </div>
+          <div class="congestion-item">
+            <span class="cong-rank">#5</span>
+            <div class="cong-bar-wrap">
+              <div class="cong-label">Jl. Asia Afrika</div>
+              <div class="cong-bar" style="width:54%;background:linear-gradient(90deg,#c0c040,#a0c030);"></div>
+            </div>
+            <span class="cong-index" style="color:#b0c040;">5.4</span>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;padding:14px;background:var(--surface-2);border-radius:var(--radius-md);border:1px solid var(--border);">
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Root Cause Breakdown</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+              <span style="color:var(--text-secondary);">🚗 High traffic volume</span>
+              <span style="color:var(--text-primary);font-weight:600;">42%</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+              <span style="color:var(--text-secondary);">🚧 Road construction</span>
+              <span style="color:var(--text-primary);font-weight:600;">28%</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+              <span style="color:var(--text-secondary);">💥 Incidents / accidents</span>
+              <span style="color:var(--text-primary);font-weight:600;">18%</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px;">
+              <span style="color:var(--text-secondary);">⛈️ Weather conditions</span>
+              <span style="color:var(--text-primary);font-weight:600;">12%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label">One-Stop Services</div>
+  <h2 class="section-title">Every urban service,<br>one platform</h2>
+  <p class="section-desc">No more switching between apps. City Pulse integrates payment, ticketing, planning, and reporting into a single seamless experience.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">💳</span>
+      <div class="service-name">In-app Payment</div>
+      <div class="service-desc">Pay for any transport mode with one wallet — linked to e-wallet, bank, or QRIS.</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🎫</span>
+      <div class="service-name">E-Tickets</div>
+      <div class="service-desc">Unified electronic tickets for MRT, TransJakarta, and more. No queues, no cash.</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📊</span>
+      <div class="service-name">Travel Reports</div>
+      <div class="service-desc">Weekly insights on your commute time, spending, and carbon footprint with trends.</div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⏰</span>
+      <div class="service-name">Smart Reminders</div>
+      <div class="service-desc">AI-powered departure alerts based on real-time conditions and your schedule.</div>
+    </div>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="stats-strip">
+    <div class="stat-cell">
+      <div class="stat-big">18 min</div>
+      <div class="stat-label-cell">Average commute time saved daily</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-big">4+</div>
+      <div class="stat-label-cell">Transport modes integrated</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-big">98.7%</div>
+      <div class="stat-label-cell">Route data accuracy</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-big">2.4M</div>
+      <div class="stat-label-cell">Daily active commuters</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / PROBLEM -->
+<section class="section" id="about">
+  <div class="feature-demo-grid">
+    <div>
+      <div class="section-label">Why City Pulse</div>
+      <h2 class="section-title">Urban commuting<br>is broken. We fixed it.</h2>
+      <p class="section-desc" style="margin-bottom: 24px;">City residents face fragmented apps, unpredictable delays, complicated multi-modal transfers, and zero visibility into what's happening on the network.</p>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
+          <span style="font-size:20px;flex-shrink:0;">❌</span>
+          <div>
+            <div style="font-weight:600;font-size:14px;margin-bottom:4px;">Fragmented experience</div>
+            <div style="font-size:13px;color:var(--text-muted);">Users juggle 4–6 different apps for buses, subway, ride-hailing, and payment.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
+          <span style="font-size:20px;flex-shrink:0;">❌</span>
+          <div>
+            <div style="font-weight:600;font-size:14px;margin-bottom:4px;">Zero real-time visibility</div>
+            <div style="font-size:13px;color:var(--text-muted);">Outdated schedules and no live data means missed buses and wasted time.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
+          <span style="font-size:20px;flex-shrink:0;">❌</span>
+          <div>
+            <div style="font-weight:600;font-size:14px;margin-bottom:4px;">Transfer confusion</div>
+            <div style="font-size:13px;color:var(--text-muted);">No single system guides you through multi-modal connections seamlessly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Target Users -->
+    <div>
+      <div class="section-label" style="margin-bottom:16px;">Who It's For</div>
+      <div class="targets-grid" style="grid-template-columns:1fr;margin-top:0;">
+        <div class="target-card">
+          <div class="target-avatar">💼</div>
+          <div class="target-role">Office Workers</div>
+          <div class="target-desc">Fixed daily commutes optimized automatically with departure reminders and live updates on your regular route.</div>
+        </div>
+        <div class="target-card">
+          <div class="target-avatar">🎒</div>
+          <div class="target-role">Students & Frequent Travelers</div>
+          <div class="target-desc">Budget-conscious routing that finds the cheapest multi-modal combination for any urban journey.</div>
+        </div>
+        <div class="target-card">
+          <div class="target-avatar">🗺️</div>
+          <div class="target-role">City Visitors</div>
+          <div class="target-desc">Instant orientation in an unfamiliar transit system with step-by-step guidance and local transport insights.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="padding: 0 32px 80px; max-width: 1280px; margin: 0 auto;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:60px;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(74,240,196,0.06),transparent);pointer-events:none;"></div>
+    <div style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;">Start Commuting Smarter</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:42px;font-weight:800;letter-spacing:-0.03em;margin-bottom:16px;">Your city.<br>Your rhythm. Your route.</h2>
+    <p style="font-size:15px;color:var(--text-secondary);max-width:440px;margin:0 auto 36px;line-height:1.7;">Join 2.4 million Jakarta residents who move smarter every day with City Pulse.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="#planner" onclick="navigate('planner');return false;" class="btn btn-accent btn-lg">Get Started Free</a>
+      <a href="#traffic" class="btn btn-ghost btn-lg">View Live Map</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="nav-logo" style="text-decoration:none;">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0a1a14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+        </svg>
+      </div>
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text-primary);letter-spacing:-0.03em;">City Pulse</span>
+    </div>
+    <p>A digital smart mobility platform designed to solve daily urban commuting pain points for city residents across Indonesia.</p>
+  </div>
+
+  <div class="footer-col">
+    <h4>Platform</h4>
+    <a href="#features">Features</a>
+    <a href="#routes">Route Planner</a>
+    <a href="#traffic">Traffic Map</a>
+    <a href="#services">Services</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Transport</h4>
+    <a href="#">MRT / Subway</a>
+    <a href="#">TransJakarta</a>
+    <a href="#">Ride-Hailing</a>
+    <a href="#">Shared Bikes</a>
+  </div>
+
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="#about">About</a>
+    <a href="#">Data Privacy</a>
+    <a href="#">Open Data API</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<div style="text-align:center;padding:20px;font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);">
+  © 2026 City Pulse Smart Mobility Platform · Jakarta, Indonesia
+</div>
+
+
+
+</div>
+
+<div id="page-planner">
+
+
+
+
+<!-- ── GEO PERMISSION ── -->
+<div class="geo-scr" id="geoScr">
+  <div class="geo-box">
+    <span class="geo-ic">📍</span>
+    <div class="geo-tl">Enable Location</div>
+    <div class="geo-sb">City Pulse uses your real-time GPS location to instantly calculate the fastest route from where you are — just like Google Maps, built for Jakarta.</div>
+    <button class="geo-btn geo-allow" onclick="requestGeo()">Allow Location Access</button>
+    <button class="geo-btn geo-skip" onclick="skipGeo()">Use Jakarta City Center</button>
+    <div class="geo-note">🔒 Your location is never stored or shared with anyone.</div>
+  </div>
+</div>
+
+<div class="app">
+
+<!-- ══ PANEL ══ -->
+<div class="panel">
+  <div class="ph">
+    <div class="logo-row">
+      <a href="#dashboard" onclick="navigate('dashboard');return false;" onclick="navigate('dashboard');return false;" class="logo">
+        <div class="logo-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#071a13" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+          </svg>
+        </div>
+        <span class="logo-nm">City Pulse</span>
+      </a>
+      <a href="#dashboard" onclick="navigate('dashboard');return false;" onclick="navigate('dashboard');return false;" class="back-btn">← Dashboard</a>
+    </div>
+
+    <!-- Search box -->
+    <div class="sbox" id="sbox">
+      <div class="srow">
+        <span class="od"></span>
+        <div style="flex:1;position:relative;">
+          <input class="si" id="orIn" type="text" placeholder="From: detecting location…" autocomplete="off"
+            oninput="onSrch('or',this.value)" onfocus="onSrch('or',this.value)" onblur="closeD('orD')">
+          <div class="sdrop" id="orD"></div>
+        </div>
+        <button class="ib" onclick="useGeo()" title="Use GPS location" style="font-size:15px;">📍</button>
+      </div>
+      <div style="display:flex;align-items:center;padding:1px 0 1px 21px;gap:8px;">
+        <div style="width:1px;height:14px;background:var(--b2);"></div>
+        <button class="swpbtn" onclick="swapLocs()">⇅</button>
+      </div>
+      <div class="srow">
+        <span class="dd"></span>
+        <div style="flex:1;position:relative;">
+          <input class="si" id="dtIn" type="text" placeholder="Where to?" autocomplete="off"
+            oninput="onSrch('dt',this.value)" onfocus="onSrch('dt',this.value)" onblur="closeD('dtD')">
+          <div class="sdrop" id="dtD"></div>
+        </div>
+        <button class="ib" onclick="clearDest()" id="clrBtn" style="display:none;font-size:15px;">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mode tabs (shown after dest set) -->
+  <div class="mtabs" id="mTabs" style="display:none;">
+    <div class="mt active" id="m-mrt" onclick="setMode('mrt')">🚇 MRT</div>
+    <div class="mt" id="m-tj" onclick="setMode('tj')">🚌 TransJakarta</div>
+    <div class="mt" id="m-ojek" onclick="setMode('ojek')">🛵 Ojek</div>
+    <div class="mt" id="m-bike" onclick="setMode('bike')">🚲 Bike</div>
+    <div class="mt" id="m-walk" onclick="setMode('walk')">🚶 Walk</div>
+  </div>
+
+  <!-- Sort bar -->
+  <div class="sbar" id="sBar" style="display:none;">
+    <span class="sc active" data-s="fastest" onclick="setSrt('fastest')">⚡ Fastest</span>
+    <span class="sc" data-s="cheapest" onclick="setSrt('cheapest')">💰 Cheapest</span>
+    <span class="sc" data-s="comfortable" onclick="setSrt('comfortable')">😌 Comfy</span>
+    <span class="sc" data-s="eco" onclick="setSrt('eco')">🌿 Eco</span>
+  </div>
+
+  <div class="ps"><div class="rp" id="rPanel">
+    <div class="empty"><span class="eic">📍</span><div class="etx">Detecting your location…</div><div class="esub">Allow location access for instant route planning.</div></div>
+  </div></div>
+</div>
+
+<!-- ══ MAP ══ -->
+<div class="mw" id="mWrap">
+  <canvas id="mc"></canvas>
+  <div class="mtop">
+    <div class="mchip" id="mchip">🗺️ Jakarta City Map</div>
+    <div class="lv"><span class="lvd"></span>LIVE</div>
+    <div class="sp1"></div>
+    <div class="mchip" id="tchip">—</div>
+  </div>
+  <!-- Traffic legend — always shown, Google Maps style -->
+  <div class="tleg">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:5px;">LIVE TRAFFIC</div>
+    <div class="tli"><div class="tld" style="background:#f05c4a;box-shadow:0 0 6px #f05c4a88;"></div>Severe</div>
+    <div class="tli"><div class="tld" style="background:#f0b44a;box-shadow:0 0 6px #f0b44a88;"></div>Heavy</div>
+    <div class="tli"><div class="tld" style="background:#e8f04a;box-shadow:0 0 5px #e8f04a66;"></div>Moderate</div>
+    <div class="tli"><div class="tld" style="background:#4af07a;box-shadow:0 0 5px #4af07a66;"></div>Clear</div>
+  </div>
+  <div class="zbar">
+    <button class="zb" onclick="zoom(.18)">+</button>
+    <button class="zb" onclick="zoom(-.18)">−</button>
+    <button class="zb" onclick="resetV()" style="font-size:12px;">⌖</button>
+  </div>
+  <div class="hpop off" id="hpop"><div class="hpn" id="hpn"></div><div class="hpt" id="hpt"></div><div class="hph">Click to set as destination</div></div>
+  <div class="wpan" id="wPan" style="display:none;"></div>
+  <div class="mleg" id="mleg">
+    <div class="mli"><span class="mll" style="background:#4af0c4;"></span>MRT Line 1 (M01–M20)</div>
+    <div class="mli"><span class="mll" style="background:#f0b44a;"></span>LRT Jabodebek Bekasi</div>
+    <div class="mli"><span class="mll" style="background:#a46af0;"></span>LRT Jabodebek Cibubur</div>
+    <div class="mli"><span class="mld" style="background:#fff;outline:2px solid #4af0c4;outline-offset:-1px;"></span>Station · 🚃 Live trains</div>
+  </div>
+</div>
+
+</div><!-- .app -->
+
+<!-- ── APP MODAL ── -->
+<div class="overlay" id="appModal">
+  <div class="mbox">
+    <div class="mtl">Open Ride App</div>
+    <div class="msb">We'll open your preferred app with the destination pre-loaded for instant booking.</div>
+    <div class="agrid">
+      <button class="abtn" onclick="openApp('grab')">
+        <div class="aic" style="background:#00b14f;">
+          <svg width="28" height="28" viewBox="0 0 50 50" fill="white"><path d="M25 5C14 5 5 14 5 25s9 20 20 20 20-9 20-20S36 5 25 5zm0 32c-6.6 0-12-5.4-12-12s5.4-12 12-12 12 5.4 12 12-5.4 12-12 12z"/><circle cx="25" cy="25" r="5"/></svg>
+        </div>
+        Grab
+      </button>
+      <button class="abtn" onclick="openApp('gojek')">
+        <div class="aic" style="background:#00aa13;">
+          <svg width="28" height="28" viewBox="0 0 50 50" fill="none"><circle cx="25" cy="25" r="18" stroke="white" stroke-width="4"/><path d="M25 17v8l6 6" stroke="white" stroke-width="3.5" stroke-linecap="round"/></svg>
+        </div>
+        Gojek
+      </button>
+    </div>
+    <button class="mcancel" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
